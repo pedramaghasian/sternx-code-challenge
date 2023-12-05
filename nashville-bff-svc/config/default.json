@@ -1,0 +1,17 @@
+{
+    "app": {
+        "port": 3000,
+        "environment": "development"
+    },
+    "swagger": {
+        "title": "Nashville BFF API",
+        "version": "1.0.0"
+    },
+    "auth": {
+        "secret": "your-secret-key",
+        "expiresIn": "1h"
+    },
+    "mongodb": {
+        "uri": "mongodb://admin:admin@my-mongo:27017/"
+    }
+}
