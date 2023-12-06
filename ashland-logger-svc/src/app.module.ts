@@ -1,10 +1,22 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { LoggerService } from './domain/logger.service';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    RabbitMQModule.forRoot(RabbitMQModule, {
+      exchanges: [
+        {
+          name: 'exchange1',
+          type: 'topic',
+        },
+      ],
+      uri: 'amqp://guest:guest@localhost:5672',
+      connectionInitOptions: { wait: false },
+      enableControllerDiscovery: true,
+    }),
+  ],
+  controllers: [],
+  providers: [LoggerService],
 })
 export class AppModule {}

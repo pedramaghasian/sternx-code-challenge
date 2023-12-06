@@ -6,9 +6,10 @@ import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 export class EventRepository {
   constructor(private readonly amqpConnection: AmqpConnection) {}
 
-  sendLogEvent(data) {
-    this.amqpConnection.publish('exchange1', 'routing-key', {
-      msg: data,
+  sendLogEvent(data, eventName) {
+    this.amqpConnection.publish('exchange1', 'logger-routing-key', {
+      eventName,
+      data,
     });
   }
 }

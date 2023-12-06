@@ -12,10 +12,10 @@ export class TaskService {
   getTasks(): string {
     return 'Hello World!';
   }
-  
+
   async createTask(data) {
     const result = await this.taskRepo.createTask(data);
-    this.eventRepo.sendLogEvent(data);
+    this.eventRepo.sendLogEvent(data, 'taskCreated');
     return result;
   }
   updateTask(): string {
