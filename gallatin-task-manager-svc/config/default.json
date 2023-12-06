@@ -1,0 +1,28 @@
+{
+    "app": {
+        "port": 5000,
+        "environment": "development"
+    },
+    "swagger": {
+        "title": "GALLATIN TASK MANAGER API",
+        "version": "1.0.0"
+    },
+    "auth": {
+        "secret": "your-secret-key",
+        "expiresIn": "1h"
+    },
+    "mongodb": {
+        "uri": "mongodb://admin:admin@my-mongo:27017/"
+    },
+    "grpc":{
+        "url":"localhost:5000"
+    },
+    "sql":{
+        "type":"mysql",
+        "host":"localhost",
+        "port":3306,
+        "username":"root",
+        "password":"root",
+        "db":"task"
+    }
+}

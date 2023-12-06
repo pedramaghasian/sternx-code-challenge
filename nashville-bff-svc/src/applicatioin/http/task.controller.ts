@@ -23,7 +23,7 @@ export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a new user' })
+  @ApiOperation({ summary: 'Create a new task' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Task created successfully',

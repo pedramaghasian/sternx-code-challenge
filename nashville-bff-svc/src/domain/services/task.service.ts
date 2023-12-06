@@ -4,7 +4,6 @@ import { TaskGrpcRepository } from '../../infrastructure/repositories/task/task.
 
 @Injectable()
 export class TaskService {
-
   constructor(private taskGrpcRepo: TaskGrpcRepository) {}
 
   getTasks(): string {
