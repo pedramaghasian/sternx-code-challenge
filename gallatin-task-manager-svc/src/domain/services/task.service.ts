@@ -9,8 +9,9 @@ export class TaskService {
     private eventRepo: EventRepository,
   ) {}
 
-  getTasks(): string {
-    return 'Hello World!';
+  async getTasks(data) {
+    const result = await this.taskRepo.getTasks(data);
+    return result;
   }
 
   async createTask(data) {
@@ -18,10 +19,16 @@ export class TaskService {
     this.eventRepo.sendLogEvent(data, 'taskCreated');
     return result;
   }
-  updateTask(): string {
-    return 'Hello World!';
+
+  async updateTask(data) {
+    const result = await this.taskRepo.updateTask(data);
+    this.eventRepo.sendLogEvent(data, 'taskUpdated');
+    return result;
   }
-  removeTask(): string {
-    return 'Hello World!';
+
+  async removeTask(id) {
+    const result = await this.taskRepo.removeTask(id);
+    this.eventRepo.sendLogEvent(id, 'taskDeleted');
+    return result;
   }
 }

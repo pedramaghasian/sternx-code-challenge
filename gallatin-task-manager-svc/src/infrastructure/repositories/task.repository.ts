@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from '../../domain/entities/task.entity';
 import { Repository } from 'typeorm';
@@ -14,15 +14,26 @@ export class TaskRepository {
     return this.taskModel.save(data);
   }
 
-  //   async updateTask(username: string): Promise<any> {
-  //     return this.userModel.findOne({ username });
-  //   }
+  async updateTask(data) {
+    const { id, ...rest } = data;
+    await this.taskModel.update(id, {
+      ...rest,
+    });
+    return data;
+  }
 
-  //   async getTasks(email: string): Promise<any> {
-  //     return this.userModel.findOne({ email });
-  //   }
+  async removeTask(id) {
+    await this.taskModel.delete(id);
+    return id;
+  }
 
-  //   async deleteTask(id: string, payload: Partial<IUser>) {
-  //     return this.userModel.updateOne({ _id: id }, payload);
-  //   }
+  async getTasks(data) {
+    const { page = 1, limit = 10 } = data;
+    const skip = (page - 1) * limit;
+    const tasksArray = await this.taskModel.find({
+      skip,
+      take: limit,
+    });
+    return { tasks: tasksArray };
+  }
 }

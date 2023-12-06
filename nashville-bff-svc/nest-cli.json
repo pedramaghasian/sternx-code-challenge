@@ -6,7 +6,7 @@
     "deleteOutDir": true,
     "assets": [
       {
-        "include": "infrastructure/proto/task/*.proto",
+        "include": "../shared/proto/*.proto",
         "outDir": "dist",
         "watchAssets": true
       }

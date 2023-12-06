@@ -14,7 +14,7 @@ async function bootstrap() {
       options: {
         url: GRPC_SERVER_URL,
         package: 'task',
-        protoPath: join(__dirname, './application/grpc/proto/task.proto'),
+        protoPath: join(__dirname, '../../shared/proto/task.proto'),
       },
     },
   );

@@ -1,46 +1,30 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
-import { join } from 'path';
+import { ClientGrpc } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class TaskGrpcRepository implements OnModuleInit {
-  //   @Client({
-  //     transport: Transport.GRPC,
-  //     options: {
-  //       package: 'task',
-  //       protoPath: join(__dirname, '../../proto/task/task.proto'),
-  //     },
-  //   })
-  //   private readonly client: ClientGrpc;
-
-  //   private taskGrpcService;
-
-  //   constructor() {
-  //     this.taskGrpcService = this.client.getService('TaskService');
-  //   }
-
-  private taskGrpcService;
+  private grpcClient;
 
   constructor(@Inject('TASK_PACKAGE') private client: ClientGrpc) {}
 
   onModuleInit() {
-    this.taskGrpcService = this.client.getService('TaskService');
+    this.grpcClient = this.client.getService('TaskService');
   }
 
   createTask(data): Observable<{ tasks }> {
-    return this.taskGrpcService.createTask(data);
+    return this.grpcClient.createTask(data);
   }
 
-  //   async updateTask(username: string): Promise<any> {
-  //     return this.userModel.findOne({ username });
-  //   }
+  updateTask(id: string, data): Observable<{ tasks }> {
+    return this.grpcClient.updateTask({ id, ...data });
+  }
 
-  //   async getTasks(email: string): Promise<any> {
-  //     return this.userModel.findOne({ email });
-  //   }
+  getTasks(pagination): Observable<{ tasks }> {
+    return this.grpcClient.getTasks(pagination);
+  }
 
-  //   async deleteTask(id: string, payload: Partial<IUser>) {
-  //     return this.userModel.updateOne({ _id: id }, payload);
-  //   }
+  removeTask(id: string): Observable<{ tasks }> {
+    return this.grpcClient.deleteTask({ id });
+  }
 }

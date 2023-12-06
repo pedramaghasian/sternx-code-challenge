@@ -6,7 +6,7 @@
     "deleteOutDir": true,
     "assets": [
       {
-        "include": "application/grpc/proto/*.proto",
+        "include": "../shared/proto/*.proto",
         "outDir": "dist",
         "watchAssets": true
       }
