@@ -11,8 +11,11 @@
         "secret": "your-secret-key",
         "expiresIn": "1h"
     },
-    "mongodb": {
-        "uri": "mongodb://admin:admin@my-mongo:27017/"
+    "rabbitmq": {
+        "name":"GALLATIN_TASK_SVC",
+        "url": "amqp://localhost:5672",
+        "queue":"logs_queue",
+        "exchange": "logs_exchange"
     },
     "grpc":{
         "url":"localhost:5000"
