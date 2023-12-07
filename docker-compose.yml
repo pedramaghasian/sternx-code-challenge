@@ -1,0 +1,58 @@
+version: '3.3'
+
+services:
+  nashville:
+    build:
+      context: ./nashville-bff-svc
+    ports:
+      - "3000:3000"
+    depends_on:
+      - gallatin
+      - ashland
+    networks:
+      - task-network
+
+  gallatin:
+    build:
+      context: ./gallatin-task-manager-svc
+    ports:
+      - "5000:5000"
+    depends_on:
+      - rabbitmq
+    networks:
+      - task-network
+
+  ashland:
+    build:
+      context: ./ashland-logger-svc
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rabbitmq
+    networks:
+      - task-network
+
+  rabbitmq:
+    image: "rabbitmq:latest"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - task-network
+
+  mysql:
+    image: "mysql:5.6.27"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: task
+    networks:
+      - task-network
+
+networks:
+  task-network:
+    driver: bridge

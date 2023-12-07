@@ -10,8 +10,5 @@
     "auth": {
         "secret": "your-secret-key",
         "expiresIn": "1h"
-    },
-    "mongodb": {
-        "uri": "mongodb://admin:admin@my-mongo:27017/"
     }
 }
